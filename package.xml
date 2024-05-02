@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package>
   <name>fast_lio</name>
-  <version>0.0.0</version>
+  <version>1.0.0</version>
 
   <description>
     This is a modified version of LOAM which is original algorithm
@@ -10,13 +10,14 @@
       Robotics: Science and Systems Conference (RSS). Berkeley, CA, July 2014.
   </description>
 
-  <maintainer email="dev@livoxtech.com">claydergc</maintainer>
+  <maintainer email="hyx020222@gmail.com">Eason Hua</maintainer>
 
   <license>BSD</license>
 
   <author email="zhangji@cmu.edu">Ji Zhang</author>
   
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>geometry_msgs</build_depend>
   <build_depend>nav_msgs</build_depend>
   <build_depend>roscpp</build_depend>
