@@ -1,0 +1,15 @@
+<launch>
+    <!-- world -->
+    <include file="$(find fast_lio)/launch/GFKD.launch"/>
+
+    <!-- 1号无人机 -->
+    <include file="$(find fast_lio)/launch/sitl_p450_3Dlidar_D435i.launch"/>
+
+    <include file="$(find fast_lio)/launch/uav_control_main_indoor.launch"/>
+
+    <!-- 启动FAST-LIO建图 -->
+    <include file="$(find fast_lio)/launch/fastlio_velodyne.launch"/>
+
+    <!-- 启动rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find fast_lio)/config/loam_livox.rviz" launch-prefix="nice"/>
+</launch>
