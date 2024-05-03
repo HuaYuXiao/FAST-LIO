@@ -4,7 +4,7 @@
 #define RETURN0AND1 0x10
 
 Preprocess::Preprocess()
-  :feature_enabled(0), lidar_type(AVIA), blind(0.01), point_filter_num(1)
+  :feature_enabled(0), blind(0.01), point_filter_num(1)
 {
   inf_bound = 10;
   N_SCANS   = 16;
@@ -33,10 +33,9 @@ Preprocess::Preprocess()
 
 Preprocess::~Preprocess() {}
 
-void Preprocess::set(bool feat_en, int lid_type, double bld, int pfilt_num)
+void Preprocess::set(bool feat_en, double bld, int pfilt_num)
 {
   feature_enabled = feat_en;
-  lidar_type = lid_type;
   blind = bld;
   point_filter_num = pfilt_num;
 }
@@ -62,16 +61,8 @@ void Preprocess::process(const sensor_msgs::PointCloud2::ConstPtr &msg, PointClo
       break;
   }
 
-  switch (lidar_type)
-  {
-  case VELO16:
     velodyne_handler(msg);
-    break;
-  
-  default:
-    printf("Error LiDAR Type");
-    break;
-  }
+
   *pcl_out = pl_surf;
 }
 
@@ -633,7 +624,6 @@ int Preprocess::plane_judge(const PointCloudXYZI &pl, vector<orgtype> &types, ui
     }
   }
 
-
   if((two_dis*two_dis/leng_wid) < p2l_ratio)
   {
     curr_direct.setZero();
@@ -660,26 +650,11 @@ int Preprocess::plane_judge(const PointCloudXYZI &pl, vector<orgtype> &types, ui
     return 0;
   }
 
-  if(lidar_type==AVIA)
-  {
-    double dismax_mid = disarr[0]/disarr[disarrsize/2];
-    double dismid_min = disarr[disarrsize/2]/disarr[disarrsize-2];
-
-    if(dismax_mid>=limit_maxmid || dismid_min>=limit_midmin)
-    {
-      curr_direct.setZero();
-      return 0;
-    }
-  }
-  else
-  {
     double dismax_min = disarr[0] / disarr[disarrsize-2];
-    if(dismax_min >= limit_maxmin)
-    {
+    if(dismax_min >= limit_maxmin){
       curr_direct.setZero();
       return 0;
     }
-  }
   
   curr_direct << vx, vy, vz;
   curr_direct.normalize();
