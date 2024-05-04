@@ -4,12 +4,8 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Odometry1/Odometry1
-        - /Odometry1/Odometry1/Shape1
-        - /Odometry1/Odometry1/Covariance1
-        - /Odometry1/Odometry1/Covariance1/Position1
-        - /Odometry1/Odometry1/Covariance1/Orientation1
-        - /MarkerArray1/Namespaces1
+        - /Odometry1/Odometry_estimate1/Covariance1/Position1
+        - /Odometry1/Odometry_estimate1/Covariance1/Orientation1
       Splitter Ratio: 0.6432291865348816
     Tree Height: 275
   - Class: rviz/Selection
@@ -29,7 +25,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan
+    SyncSource: currPoints
 Preferences:
   PromptSaveOnExit: false
 Toolbars:
@@ -91,6 +87,9 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
+        odom:
+          odom_ned:
+            {}
         world:
           base_link:
             3Dlidar_link:
@@ -104,13 +103,45 @@ Visualization Manager:
                 {}
             map_ned:
               {}
-            odom:
-              odom_ned:
-                {}
       Update Interval: 0
       Value: true
     - Class: rviz/Group
       Displays:
+        - Angle Tolerance: 0.10000000149011612
+          Class: rviz/Odometry
+          Covariance:
+            Orientation:
+              Alpha: 0.5
+              Color: 255; 255; 127
+              Color Style: Unique
+              Frame: Local
+              Offset: 1
+              Scale: 1
+              Value: true
+            Position:
+              Alpha: 0.30000001192092896
+              Color: 204; 51; 204
+              Scale: 1
+              Value: true
+            Value: true
+          Enabled: true
+          Keep: 1
+          Name: Odometry_groundtruth
+          Position Tolerance: 0.10000000149011612
+          Queue Size: 10
+          Shape:
+            Alpha: 1
+            Axes Length: 1
+            Axes Radius: 0.10000000149011612
+            Color: 255; 25; 0
+            Head Length: 0.30000001192092896
+            Head Radius: 0.10000000149011612
+            Shaft Length: 1
+            Shaft Radius: 0.05000000074505806
+            Value: Axes
+          Topic: /prometheus/drone_odom
+          Unreliable: false
+          Value: true
         - Angle Tolerance: 0.009999999776482582
           Class: rviz/Odometry
           Covariance:
@@ -130,13 +161,13 @@ Visualization Manager:
             Value: true
           Enabled: true
           Keep: 1
-          Name: Odometry
+          Name: Odometry_estimate
           Position Tolerance: 0.0010000000474974513
           Queue Size: 10
           Shape:
             Alpha: 1
             Axes Length: 1
-            Axes Radius: 0.20000000298023224
+            Axes Radius: 0.10000000149011612
             Color: 255; 85; 0
             Head Length: 0
             Head Radius: 0
@@ -148,95 +179,93 @@ Visualization Manager:
           Value: true
       Enabled: true
       Name: Odometry
-    - Alpha: 0.5
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 2.62149977684021
-        Min Value: -0.13646477460861206
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: FlatColor
-      Decay Time: 0
-      Enabled: true
-      Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Min Color: 0; 0; 0
-      Name: LaserScan
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.05000000074505806
-      Style: Points
-      Topic: /prometheus/sensors/3Dlidar_scan
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: true
-    - Alpha: 0
-      Buffer Length: 2
-      Class: rviz/Path
-      Color: 25; 255; 255
-      Enabled: true
-      Head Diameter: 0
-      Head Length: 0
-      Length: 0.30000001192092896
-      Line Style: Billboards
-      Line Width: 0.20000000298023224
-      Name: Path
-      Offset:
-        X: 0
-        Y: 0
-        Z: 0
-      Pose Color: 25; 255; 255
-      Pose Style: None
-      Queue Size: 10
-      Radius: 0.029999999329447746
-      Shaft Diameter: 0.4000000059604645
-      Shaft Length: 0.4000000059604645
-      Topic: /path
-      Unreliable: false
-      Value: true
-    - Alpha: 1
-      Autocompute Intensity Bounds: false
-      Autocompute Value Bounds:
-        Max Value: 10
-        Min Value: -10
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 255; 255; 255
-      Color Transformer: Intensity
-      Decay Time: 0
-      Enabled: false
-      Invert Rainbow: false
-      Max Color: 239; 41; 41
-      Max Intensity: 0
-      Min Color: 239; 41; 41
-      Min Intensity: 0
-      Name: PointCloud2
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 4
-      Size (m): 0.30000001192092896
-      Style: Spheres
-      Topic: /cloud_effected
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: false
     - Class: rviz/Group
       Displays:
+        - Alpha: 0
+          Buffer Length: 2
+          Class: rviz/Path
+          Color: 25; 255; 0
+          Enabled: true
+          Head Diameter: 0.30000001192092896
+          Head Length: 0.20000000298023224
+          Length: 0.30000001192092896
+          Line Style: Billboards
+          Line Width: 0.029999999329447746
+          Name: Path_groundtruth
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 255; 85; 255
+          Pose Style: None
+          Queue Size: 10
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.10000000149011612
+          Shaft Length: 0.10000000149011612
+          Topic: /prometheus/drone_trajectory
+          Unreliable: false
+          Value: true
+        - Alpha: 0
+          Buffer Length: 2
+          Class: rviz/Path
+          Color: 25; 255; 255
+          Enabled: true
+          Head Diameter: 0
+          Head Length: 0
+          Length: 0.30000001192092896
+          Line Style: Billboards
+          Line Width: 0.029999999329447746
+          Name: Path_estimate
+          Offset:
+            X: 0
+            Y: 0
+            Z: 0
+          Pose Color: 25; 255; 255
+          Pose Style: None
+          Queue Size: 10
+          Radius: 0.029999999329447746
+          Shaft Diameter: 0.4000000059604645
+          Shaft Length: 0.4000000059604645
+          Topic: /path
+          Unreliable: false
+          Value: true
+      Enabled: true
+      Name: Path
+    - Class: rviz/Group
+      Displays:
+        - Alpha: 0.5
+          Autocompute Intensity Bounds: true
+          Autocompute Value Bounds:
+            Max Value: 2.62149977684021
+            Min Value: -0.13646477460861206
+            Value: true
+          Axis: Z
+          Channel Name: intensity
+          Class: rviz/PointCloud2
+          Color: 255; 255; 255
+          Color Transformer: FlatColor
+          Decay Time: 0
+          Enabled: true
+          Invert Rainbow: false
+          Max Color: 255; 255; 255
+          Min Color: 0; 0; 0
+          Name: LaserScan_groundtruth
+          Position Transformer: XYZ
+          Queue Size: 10
+          Selectable: true
+          Size (Pixels): 3
+          Size (m): 0.05000000074505806
+          Style: Points
+          Topic: /prometheus/sensors/3Dlidar_scan
+          Unreliable: false
+          Use Fixed Frame: true
+          Use rainbow: true
+          Value: true
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 4.147519111633301
-            Min Value: 0.09482474625110626
+            Max Value: 2.851801872253418
+            Min Value: -0.27912020683288574
             Value: true
           Axis: Z
           Channel Name: intensity
@@ -248,7 +277,7 @@ Visualization Manager:
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Min Color: 238; 238; 236
-          Name: surround
+          Name: LaserScan_estimate
           Position Transformer: XYZ
           Queue Size: 1
           Selectable: false
@@ -260,6 +289,10 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
+      Enabled: true
+      Name: LaserScan
+    - Class: rviz/Group
+      Displays:
         - Alpha: 1
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
@@ -318,42 +351,6 @@ Visualization Manager:
           Value: false
       Enabled: true
       Name: mapping
-    - Alpha: 1
-      Autocompute Intensity Bounds: true
-      Autocompute Value Bounds:
-        Max Value: 13.139549255371094
-        Min Value: -32.08251953125
-        Value: true
-      Axis: Z
-      Channel Name: intensity
-      Class: rviz/PointCloud2
-      Color: 138; 226; 52
-      Color Transformer: FlatColor
-      Decay Time: 0
-      Enabled: false
-      Invert Rainbow: false
-      Max Color: 138; 226; 52
-      Min Color: 138; 226; 52
-      Name: PointCloud2
-      Position Transformer: XYZ
-      Queue Size: 10
-      Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.10000000149011612
-      Style: Flat Squares
-      Topic: /Laser_map
-      Unreliable: false
-      Use Fixed Frame: true
-      Use rainbow: true
-      Value: false
-    - Class: rviz/MarkerArray
-      Enabled: false
-      Marker Topic: /MarkerArray
-      Name: MarkerArray
-      Namespaces:
-        {}
-      Queue Size: 100
-      Value: false
     - Class: rviz/Group
       Displays:
         - Class: rviz/Image
@@ -382,6 +379,44 @@ Visualization Manager:
           Value: true
       Enabled: true
       Name: Image
+    - Class: rviz/MarkerArray
+      Enabled: false
+      Marker Topic: /MarkerArray
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Queue Size: 100
+      Value: false
+    - Alpha: 1
+      Autocompute Intensity Bounds: false
+      Autocompute Value Bounds:
+        Max Value: 10
+        Min Value: -10
+        Value: true
+      Axis: Z
+      Channel Name: intensity
+      Class: rviz/PointCloud2
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
+      Enabled: false
+      Invert Rainbow: false
+      Max Color: 239; 41; 41
+      Max Intensity: 0
+      Min Color: 239; 41; 41
+      Min Intensity: 0
+      Name: PointCloud2
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 4
+      Size (m): 0.30000001192092896
+      Style: Spheres
+      Topic: /cloud_effected
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 0; 0; 0
@@ -410,7 +445,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 16.41176414489746
+      Distance: 16.175434112548828
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -451,4 +486,4 @@ Window Geometry:
     collapsed: true
   Width: 2074
   X: 806
-  Y: 508
+  Y: 471
