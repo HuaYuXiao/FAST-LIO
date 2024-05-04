@@ -126,19 +126,6 @@ Set ``` pcd_save_enable ``` in launchfile to ``` 1 ```. All the scans (in global
 ```
 
 ## 4. Rosbag Example
-### 4.1 Livox Avia Rosbag
-<div align="left">
-<img src="doc/results/HKU_LG_Indoor.png" width=47% />
-<img src="doc/results/HKU_MB_002.png" width = 51% >
-
-Files: Can be downloaded from [google drive](https://drive.google.com/drive/folders/1CGYEJ9-wWjr8INyan6q1BZz_5VtGB-fP?usp=sharing)
-
-Run:
-```
-roslaunch fast_lio mapping_avia.launch
-rosbag play YOUR_DOWNLOADED.bag
-
-```
 
 ### 4.2 Velodyne HDL-32E Rosbag
 
