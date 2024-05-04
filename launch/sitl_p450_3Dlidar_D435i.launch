@@ -54,4 +54,13 @@
 		<rosparam command="load" file="$(find uav_simulation)/config/px4_config_indoor.yaml" />
 		<rosparam command="load" file="$(find uav_simulation)/config/px4_pluginlists_indoor.yaml" />
 	</node>
+
+	<!-- TF for 3D lidar-->
+	<!-- 3Dlidar_link是3D激光雷达坐标系 -->
+	<!-- 机体系与3Dlidar_link的坐标转换关系见 amov_solo_3Dlidar.sdf -->
+	<node pkg="tf" type="static_transform_publisher" name="tf_3Dlidar"
+		  args="0 0 0.16 0 0 0 base_link 3Dlidar_link 100"/>
+
+	<node pkg="tf" type="static_transform_publisher" name="tf_imu"
+		  args="0 0 0 0 0 0 3Dlidar_link 3Dlidar::lidar_imu_link 100"/>
 </launch>
