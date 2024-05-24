@@ -55,8 +55,6 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(Eigen3 REQUIRED)
 find_package(PCL 1.8 REQUIRED)
 
-message(Eigen: ${EIGEN3_INCLUDE_DIR})
-
 include_directories(
 	${catkin_INCLUDE_DIRS} 
   ${EIGEN3_INCLUDE_DIR}

@@ -17,12 +17,14 @@
 <!-- 10. [**FAST-LIVO**](https://github.com/hku-mars/FAST-LIVO): Fast and Tightly-coupled Sparse-Direct LiDAR-Inertial-Visual Odometry. -->
 
 ## FAST-LIO
+
 **FAST-LIO** (Fast LiDAR-Inertial Odometry) is a computationally efficient and robust LiDAR-inertial odometry package. It fuses LiDAR feature points with IMU data using a tightly-coupled iterated extended Kalman filter to allow robust navigation in fast-motion, noisy or cluttered environments where degeneration occurs. Our package address many key issues:
 1. Fast iterated Kalman filter for odometry optimization;
 2. Automaticaly initialized at most steady environments;
 3. Parallel KD-Tree Search to decrease the computation;
 
 ## FAST-LIO 2.0 (2021-07-05 Update)
+
 <!-- ![image](doc/real_experiment2.gif) -->
 <!-- [![Watch the video](doc/real_exp_2.png)](https://youtu.be/2OvjGnxszf8) -->
 <div align="left">
@@ -59,6 +61,7 @@
     <img src="doc/results/HKU_MB_001.png" width = 49% >
 </div> -->
 
+
 ## 1. Prerequisites
 
 ### 1.2. **PCL && Eigen**
@@ -67,6 +70,7 @@ PCL    >= 1.8,   Follow [PCL Installation](http://www.pointclouds.org/downloads/
 Eigen  >= 3.3.4, Follow [Eigen Installation](http://eigen.tuxfamily.org/index.php?title=Main_Page).
 
 ## 2. Build from source
+
 Clone the repository and catkin_make:
 
 ```bash
@@ -80,7 +84,9 @@ catkin_make install --source src/FAST-LIO --build build/fast_lio
 - Remember to source the livox_ros_driver before build (follow 1.3 **livox_ros_driver**)
 - If you want to use a custom build of PCL, add the following line to ~/.bashrc
 ```export PCL_ROOT={CUSTOM_PCL_PATH}```
+- 
 ## 3. Directly run
+
 Noted:
 
 A. Please make sure the IMU and LiDAR are **Synchronized**, that's important.
@@ -88,6 +94,7 @@ A. Please make sure the IMU and LiDAR are **Synchronized**, that's important.
 B. The warning message "Failed to find match for field 'time'." means the timestamps of each LiDAR points are missed in the rosbag file. That is important for the forward propagation and backwark propagation.
 
 C. We recommend to set the **extrinsic_est_en** to false if the extrinsic is give. As for the extrinsic initiallization, please refer to our recent work: [**Robust Real-time LiDAR-inertial Initialization**](https://github.com/hku-mars/LiDAR_IMU_Init).
+
 
 ### 3.3 For Velodyne
 
@@ -125,34 +132,9 @@ Set ``` pcd_save_enable ``` in launchfile to ``` 1 ```. All the scans (in global
     5 is intensity
 ```
 
-## 4. Rosbag Example
-### 4.1 Livox Avia Rosbag
-<div align="left">
-<img src="doc/results/HKU_LG_Indoor.png" width=47% />
-<img src="doc/results/HKU_MB_002.png" width = 51% >
-
-Files: Can be downloaded from [google drive](https://drive.google.com/drive/folders/1CGYEJ9-wWjr8INyan6q1BZz_5VtGB-fP?usp=sharing)
-
-Run:
-```
-roslaunch fast_lio mapping_avia.launch
-rosbag play YOUR_DOWNLOADED.bag
-
-```
-
-### 4.2 Velodyne HDL-32E Rosbag
-
-**NCLT Dataset**: Original bin file can be found [here](http://robots.engin.umich.edu/nclt/).
-
-We produce [Rosbag Files](https://drive.google.com/drive/folders/1blQJuAB4S80NwZmpM6oALyHWvBljPSOE?usp=sharing) and [a python script](https://drive.google.com/file/d/1QC9IRBv2_-cgo_AEvL62E1ml1IL9ht6J/view?usp=sharing) to generate Rosbag files: ```python3 sensordata_to_rosbag_fastlio.py bin_file_dir bag_name.bag```
-    
-Run:
-```
-roslaunch fast_lio mapping_velodyne.launch
-rosbag play YOUR_DOWNLOADED.bag
-```
 
 ## 5.Implementation on UAV
+
 In order to validate the robustness and computational efficiency of FAST-LIO in actual mobile robots, we build a small-scale quadrotor which can carry a Livox Avia LiDAR with 70 degree FoV and a DJI Manifold 2-C onboard computer with a 1.8 GHz Intel i7-8550U CPU and 8 G RAM, as shown in below.
 
 The main structure of this UAV is 3d printed (Aluminum or PLA), the .stl file will be open-sourced in the future.
@@ -161,6 +143,7 @@ The main structure of this UAV is 3d printed (Aluminum or PLA), the .stl file wi
     <img src="doc/uav01.jpg" width=40.5% >
     <img src="doc/uav_system.png" width=57% >
 </div>
+
 
 ## 6.Acknowledgments
 
